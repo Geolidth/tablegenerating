@@ -68,4 +68,6 @@ saveButton.addEventListener('click', ()=>{
     }
     gyumolcsok.push(gyumolcs);
     console.log(gyumolcsok);
+    tbody.textContent='';
+    generateTbody();
 });
