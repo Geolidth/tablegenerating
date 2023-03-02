@@ -1,0 +1,8 @@
+{
+    "fruits":[
+        {"id":1,"name":"eper", "quantity": 30, "price": 3},
+        {"id":2,"name":"eper", "quantity": 30, "price": 3},
+        {"id":3,"name":"eper", "quantity": 30, "price": 3}
+
+    ]
+}
