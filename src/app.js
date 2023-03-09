@@ -25,12 +25,12 @@ function getFruits() {
     let url = host + endpoint;
 
     fetch(url)
-    .then(response =>  response.json())
-    .then(result => {
-        console.log(result);
-        gyumolcsok=result;
-        generateTbody();
-    } );
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            gyumolcsok = result;
+            generateTbody();
+        });
 }
 getFruits();
 console.log(gyumolcsok);
@@ -81,6 +81,22 @@ function generateTdDelete(id) {
     return td;
 }
 
+function createFruit(fruit) {
+    let endpoint = 'fruits';
+    let url = host + endpoint;
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(fruit),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result)
+        });
+}
+
 saveButton.addEventListener('click', () => {
     console.log('működik');
     let name = nameInput.value;
@@ -91,11 +107,9 @@ saveButton.addEventListener('click', () => {
         quantity: quantity,
         price: price
     };
-
-    gyumolcsok.push(gyumolcs);
-    console.log(gyumolcsok);
+    createFruit(gyumolcs);
+    getFruits();
     tbody.textContent = '';
-    generateTbody();
     clearInputOnAddModal();
 });
 
