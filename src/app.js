@@ -113,7 +113,7 @@ function generateTdEdit(fruit) {
     button.classList = "btn btn-secondary";
     button.setAttribute('data-bs-toggle', 'modal');
     button.setAttribute('data-bs-target', "#editModal");
-    button.addEventListener('click', () => {
+    button.addEventListener('click', () => { 
         idEdit.value = fruit.id;
         nameEdit.value = fruit.name;
         quantityEdit.value = fruit.quantity;
