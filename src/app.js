@@ -18,7 +18,7 @@ const editButton = document.querySelector('#saveEditButton');
 // ];
 
 var gyumolcsok = [];
-const host = 'http://localhost:3000/';
+const host = 'http://localhost:8000/';
 
 function getFruits() {
     let endpoint = 'fruits';
@@ -64,18 +64,19 @@ function generateTdDelete(id) {
     button.classList = "btn btn-warning";
     button.addEventListener('click', () => {
         console.log(id);
-        let index = 0;
-        let count = 0;
-        gyumolcsok.forEach((gy) => {
-            if (gy.id == id) {
-                index = count;
-            }
-            count++;
-        });
-        console.log(index);
-        gyumolcsok.splice(index, 1);
-        tbody.textContent = "";
-        generateTbody();
+        deleteFruit(id);
+        // let index = 0;
+        // let count = 0;
+        // gyumolcsok.forEach((gy) => {
+        //     if (gy.id == id) {
+        //         index = count;
+        //     }
+        //     count++;
+        // });
+        // console.log(index);
+        // gyumolcsok.splice(index, 1);
+        // tbody.textContent = "";
+        // generateTbody();
     });
     td.append(button);
     return td;
@@ -95,6 +96,21 @@ function createFruit(fruit) {
         .then(result => {
             console.log(result)
         });
+}
+
+function deleteFruit(id) {
+    let endpoint = 'fruits';
+    let url = host + endpoint + '/' + id;
+    fetch(url,{
+        method: 'delete'
+    
+    })
+    .then(response=>response.json())
+    .then(result=>{
+        console.log(result);
+        tbody.textContent = "";
+        getFruits();
+    });
 }
 
 saveButton.addEventListener('click', () => {
