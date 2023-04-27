@@ -101,16 +101,16 @@ function createFruit(fruit) {
 function deleteFruit(id) {
     let endpoint = 'fruits';
     let url = host + endpoint + '/' + id;
-    fetch(url,{
+    fetch(url, {
         method: 'delete'
-    
+
     })
-    .then(response=>response.json())
-    .then(result=>{
-        console.log(result);
-        tbody.textContent = "";
-        getFruits();
-    });
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            tbody.textContent = "";
+            getFruits();
+        });
 }
 
 saveButton.addEventListener('click', () => {
@@ -141,6 +141,13 @@ editButton.addEventListener('click', () => {
     let name = nameEdit.value;
     let quantity = quantityEdit.value;
     let price = priceEdit.value;
+    let fruit = {
+        id: id,
+        name: name,
+        quantity: quantity,
+        price: price
+    }
+    updateFruit(fruit);
 
     gyumolcsok.forEach(gyumolcs => {
         if ((gyumolcs.id == id)) {
@@ -150,6 +157,7 @@ editButton.addEventListener('click', () => {
         }
     });
     tbody.textContent = '';
+
     generateTbody();
 });
 
@@ -170,4 +178,21 @@ function generateTdEdit(fruit) {
     });
     td.append(button);
     return td;
-}
+};
+
+function updateFruit(fruit) {
+    let endpoint = 'fruits';
+    let url = host + endpoint +"/"+ fruit.id;
+    let headers = {
+        "Content-Type": "application/json"
+    }
+    fetch(url, {
+        method: 'put',
+        body: JSON.stringify(fruit),
+        headers: headers
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+        });
+};
